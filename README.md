@@ -28,10 +28,8 @@ A systematic approach to mastering frontend fundamentals through repeated practi
    # macOS/Linux
    curl https://get.volta.sh | bash
 
-   # Windows - download from https://volta.sh/
    # Or with package managers:
    # brew install volta        (macOS)
-   # choco install volta       (Windows)
    ```
 
 2. **Clone and setup project**:
