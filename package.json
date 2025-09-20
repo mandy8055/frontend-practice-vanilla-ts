@@ -8,11 +8,10 @@
     "doc": "docs"
   },
   "scripts": {
-    "compile": "tsc --watch",
-    "compile-once": "tsc",
-    "new-component": "tsx scripts/create-component.ts",
-    "serve": "live-server --port=3000 --open=/index.html",
-    "dev": "pnpm run compile & pnpm run serve"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "new-component": "tsx scripts/create-component.ts"
   },
   "keywords": [
     "frontend",
@@ -26,12 +25,15 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^24.5.2",
-    "live-server": "^1.2.2",
     "tsx": "^4.20.5",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "vite": "^7.1.6"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:mandy8055/frontend-practice-vanilla-ts.git"
+  },
+  "volta": {
+    "node": "22.19.0"
   }
 }

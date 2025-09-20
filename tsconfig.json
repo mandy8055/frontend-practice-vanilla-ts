@@ -4,8 +4,6 @@
     "module": "ES2020",
     "moduleResolution": "node",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "outDir": "./dist",
-    "rootDir": "./",
     "strict": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -17,6 +15,6 @@
     "noEmitOnError": false,
     "allowJs": true
   },
-  "include": ["components/**/*", "template/**/*", "scripts/**/*"],
+  "include": ["components/**/*.ts", "template/**/*.ts", "scripts/**/*.ts"],
   "exclude": ["node_modules", "dist", ".git"]
 }
