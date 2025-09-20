@@ -16,27 +16,46 @@ A systematic approach to mastering frontend fundamentals through repeated practi
 
 ### Prerequisites
 
-- Node.js 18+
-- pnpm (recommended) or npm
+- **Node.js**: Managed automatically with Volta (see setup below)
+- **Volta**: For seamless Node.js version management
+- **pnpm**: Package manager (pinned via Volta)
 
 ### Setup
 
-```bash
-# Clone the repository
-git clone https://github.com/mandy8055/frontend-practice-vanilla-ts.git
-cd frontend-practice-vanilla-ts
+1. **Install Volta** (one-time setup):
 
-# Install dependencies
-pnpm install
+   ```bash
+   # macOS/Linux
+   curl https://get.volta.sh | bash
 
-# Start development environment
-pnpm dev
-```
+   # Windows - download from https://volta.sh/
+   # Or with package managers:
+   # brew install volta        (macOS)
+   # choco install volta       (Windows)
+   ```
 
-This will start:
+2. **Clone and setup project**:
 
-- 🔄 TypeScript compiler in watch mode
-- 🌐 Live server at `http://localhost:3000` (or similar port)
+   ```bash
+   git clone https://github.com/mandy8055/frontend-practice-vanilla-ts.git
+   cd frontend-practice-vanilla-ts
+
+   # Volta automatically switches to pinned Node.js version (22.19.0)
+   # Install dependencies
+   pnpm install
+   ```
+
+3. **Start development server**:
+
+   ```bash
+   pnpm dev
+   ```
+
+   This starts Vite dev server at `http://localhost:3000` with:
+
+   - ⚡ Instant TypeScript compilation
+   - 🔥 Hot module replacement
+   - 📁 Clean workspace (no compiled `.js` files)
 
 ### Create Your First Component
 
@@ -44,10 +63,12 @@ This will start:
 # Create a new component from template
 pnpm new-component 01-cta-button
 
-# Navigate to the component
-cd components/01-cta-button
+# Component will be created at: components/01-cta-button/
+# - index.html (references script.ts directly)
+# - script.ts (TypeScript code)
+# - styles.css (component styles)
 
-# Open index.html in your browser and start coding!
+# Visit: http://localhost:3000/components/01-cta-button/
 ```
 
 ## 📚 Practice System
@@ -57,7 +78,7 @@ cd components/01-cta-button
 1. **Start simple** - Build individual components before complex applications
 2. **Time-bound practice** - Each component has a target completion time (5-15 minutes)
 3. **Repetition builds speed** - Practice the same component multiple times
-4. **Vanilla-first** - No frameworks, just HTML/CSS/TypeScript fundamentals
+4. **TypeScript-first** - Build with modern tooling and type safety
 5. **Progressive complexity** - Components are ordered from simple to complex
 
 ### Memorized Values (Practice these until automatic)
@@ -65,23 +86,22 @@ cd components/01-cta-button
 #### Colors
 
 ```css
-/* Backgrounds */
-#FFFFFF  /* Pure white */
-#F9FAFB  /* Light gray */
-#1F2937  /* Dark gray */
-#111827  /* Near black */
-
-/* Actions */
-#3B82F6  /* Primary blue */
-#10B981  /* Success green */
-#EF4444  /* Danger red */
-#F59E0B  /* Warning orange */
-#6B7280  /* Neutral gray */
+/* CSS Variables (recommended) */
+:root {
+  --primary: #3b82f6; /* Primary blue */
+  --success: #10b981; /* Success green */
+  --danger: #ef4444; /* Danger red */
+  --warning: #f59e0b; /* Warning orange */
+  --gray: #6b7280; /* Neutral gray */
+  --dark: #1f2937; /* Dark gray */
+  --light: #f9fafb; /* Light gray */
+}
 ```
 
-#### Spacing (rem values)
+#### Spacing
 
 ```css
+/* rem values for consistency */
 0.5rem  /* 8px  - Tiny gaps */
 1rem    /* 16px - Standard padding */
 1.5rem  /* 24px - Medium spacing */
@@ -94,10 +114,18 @@ cd components/01-cta-button
 
 ```css
 /* Border radius */
-4px, 8px, 12px
+border-radius: 4px, 8px, 12px;
 
 /* Font sizes */
-0.875rem (14px), 1rem (16px), 1.125rem (18px), 1.5rem (24px), 2rem (32px)
+font-size: 0.875rem (14px), 1rem (16px), 1.125rem (18px), 1.5rem (24px),
+  2rem (32px);
+
+/* Transitions */
+transition: all 0.2s ease;
+
+/* Shadows */
+box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 ```
 
 ## 🏗️ Component Practice Order
@@ -139,10 +167,9 @@ cd components/01-cta-button
 
 ```bash
 # Development
-pnpm dev              # Start TypeScript compiler + live server
-pnpm compile          # Watch TypeScript compilation
-pnpm compile-once     # Compile TypeScript once
-pnpm serve            # Start live server only
+pnpm dev              # Start Vite dev server with TypeScript compilation
+pnpm build            # Build for production
+pnpm preview          # Preview production build
 
 # Component Management
 pnpm new-component <name>    # Create new component from template
@@ -158,19 +185,20 @@ pnpm new-component test-modal
 frontend-practice-vanilla-ts/
 ├── components/                    # Your practice components
 │   ├── 01-cta-button/            # Component folder
-│   │   ├── index.html            # Component HTML
-│   │   ├── style.css             # Component styles
+│   │   ├── index.html            # Component HTML (references script.ts)
+│   │   ├── styles.css            # Component styles
 │   │   └── script.ts             # Component TypeScript
 │   └── ...
-├── templates/                     # Component templates
+├── template/                     # Component templates
 │   └── component-starter/        # Base template
 ├── docs/                         # Documentation and notes
 ├── scripts/                      # Build scripts
 │   └── create-component.ts       # Component scaffolding
-├── dist/                         # Compiled TypeScript
+├── dist/                         # Production build output
 ├── index.html                    # Practice portfolio dashboard
-├── package.json                  # Dependencies & scripts
+├── vite.config.ts                # Vite configuration
 ├── tsconfig.json                 # TypeScript configuration
+├── package.json                  # Dependencies & scripts (with Volta pinning)
 └── README.md                     # This file
 ```
 
@@ -193,34 +221,60 @@ Update the `practiceCount` in `index.html` after each practice session to track 
 
 ### Daily Practice Routine
 
-1. **Choose a component** from your current phase
-2. **Set a timer** for the target time
-3. **Build from scratch** using memorized values
-4. **Focus on speed**, not perfection
-5. **Repeat** until you can build it confidently within the time limit
-6. **Move to next component** only after mastering the current one
+1. **Start dev server**: `pnpm dev`
+2. **Choose a component** from your current phase
+3. **Set a timer** for the target time
+4. **Build from scratch** using memorized values
+5. **Focus on speed**, not perfection
+6. **Repeat** until you can build it confidently within the time limit
+7. **Move to next component** only after mastering the current one
 
 ### Speed Building Tips
 
-- **Don't think about colors** - use your memorized hex codes immediately
+- **Don't think about colors** - use your CSS variables immediately
 - **Use consistent spacing** - stick to your rem values
 - **Build patterns, not pixels** - focus on structure over perfect alignment
 - **Time yourself** - track improvement over multiple attempts
 - **Practice daily** - even 15-20 minutes builds significant muscle memory
+- **Use TypeScript** - build muscle memory for type annotations
 
-## 🔧 Customization
+## 🔧 Technology Stack
 
-### Adding New Components
+- **Vite** - Lightning-fast dev server with native TypeScript support
+- **TypeScript** - Type safety and modern JavaScript features
+- **Volta** - Automatic Node.js version management
+- **pnpm** - Fast, efficient package manager
+- **CSS3** - Modern styling with custom properties
+- **ES Modules** - Native module system support
 
-1. Add component info to the `components` array in `index.html`
-2. Create the component: `pnpm new-component your-component`
-3. Practice and track your progress!
+## 🚀 Development Features
 
-### Modifying Templates
+- ⚡ **Instant TypeScript compilation** - No build step required
+- 🔥 **Hot Module Replacement** - Changes reflect immediately
+- 📁 **Clean workspace** - No compiled `.js` files in your project
+- 🔧 **Modern tooling** - Industry-standard development setup
+- 🌍 **GitHub Pages ready** - `pnpm build` creates deployable files
 
-Edit files in `templates/component-starter/` to customize the base template for new components.
+## 🌐 Deployment
 
-## 📚 Learning Resources
+### GitHub Pages
+
+```bash
+# Build for production
+pnpm build
+
+# The dist/ folder contains your built site
+# Configure GitHub Pages to serve from /dist or use GitHub Actions
+```
+
+### Local Preview
+
+```bash
+# Preview the production build
+pnpm preview
+```
+
+## 🎯 Learning Resources
 
 ### Documentation Structure
 
@@ -233,6 +287,22 @@ Edit files in `templates/component-starter/` to customize the base template for 
 - **Repeat frequently** - same component multiple times until automatic
 - **Time everything** - build speed awareness
 - **Focus on fundamentals** - avoid fancy libraries or frameworks
+- **Use TypeScript** - build type-thinking habits for interviews
+
+## 🔄 Version Management
+
+This project uses [Volta](https://volta.sh/) for automatic Node.js version management:
+
+- **Pinned Node.js**: 22.19.0 (automatically activated in this project)
+- **Pinned pnpm**: 9.0.0
+- **Automatic switching** - Volta handles version switching when you `cd` into the project
+
+### Manual Setup (without Volta)
+
+If you prefer not to use Volta:
+
+- Node.js >= 22.19.0
+- pnpm >= 9.0.0
 
 ## 📄 License
 
