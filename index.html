@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Frontend Practice Portfolio</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          sans-serif;
+        line-height: 1.6;
+        color: #1f2937;
+        background: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 100%);
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 0.5rem;
+      }
+
+      .header p {
+        font-size: 1.2rem;
+        color: #6b7280;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-bottom: 3rem;
+      }
+
+      .stat-card {
+        background: #ffffff;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #3b82f6;
+      }
+
+      .stat-label {
+        color: #6b7280;
+        font-size: 0.9rem;
+      }
+
+      .components-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .component-card {
+        background: #ffffff;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        border-left: 4px solid #e5e7eb;
+      }
+
+      .component-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .component-card.completed {
+        border-left-color: #10b981;
+      }
+
+      .component-card.in-progress {
+        border-left-color: #f59e0b;
+      }
+
+      .component-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #1f2937;
+      }
+
+      .component-description {
+        color: #6b7280;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .component-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.8rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .component-status {
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-weight: 500;
+      }
+
+      .component-practice-count {
+        background: #eef2ff;
+        color: #3730a3;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-weight: 500;
+        font-size: 0.75rem;
+      }
+
+      .status-completed {
+        background: #d1fae5;
+        color: #065f46;
+      }
+
+      .status-in-progress {
+        background: #fef3c7;
+        color: #92400e;
+      }
+
+      .status-todo {
+        background: #f3f4f6;
+        color: #6b7280;
+      }
+
+      .component-time {
+        color: #6b7280;
+      }
+
+      .component-link {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: #e5e7eb;
+        border-radius: 4px;
+        margin: 2rem 0;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #10b981, #3b82f6);
+        width: 0%;
+        transition: width 0.3s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Frontend Practice Portfolio</h1>
+        <p>
+          Vanilla HTML/CSS/TypeScript component practice for interview speed
+        </p>
+      </div>
+
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-number" id="completed-count">0</div>
+          <div class="stat-label">Completed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="total-count">24</div>
+          <div class="stat-label">Total Components</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="total-practice">0</div>
+          <div class="stat-label">Total Practice Sessions</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="streak-count">0</div>
+          <div class="stat-label">Practice Streak (days)</div>
+        </div>
+      </div>
+
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+
+      <div class="components-grid" id="components-grid">
+        <!-- Components will be dynamically loaded here -->
+      </div>
+    </div>
+
+    <script>
+      // Component list with your practice order
+      const components = [
+        {
+          name: '01-cta-button',
+          title: 'CTA Button',
+          description: 'Primary, secondary, danger states',
+          targetTime: 5,
+          practiceCount: 0,
+        },
+        {
+          name: '02-loader-spinner',
+          title: 'Loader Spinner',
+          description: 'Simple rotating circle animation',
+          targetTime: 7,
+          practiceCount: 0,
+        },
+        {
+          name: '03-card-component',
+          title: 'Card Component',
+          description: 'Container with shadow and padding',
+          targetTime: 6,
+          practiceCount: 0,
+        },
+        {
+          name: '04-form-input',
+          title: 'Form Input Field',
+          description: 'With validation states',
+          targetTime: 8,
+          practiceCount: 0,
+        },
+        {
+          name: '05-submit-form',
+          title: 'Submit Form',
+          description: 'Register/login form with validation',
+          targetTime: 12,
+          practiceCount: 0,
+        },
+        {
+          name: '06-navbar',
+          title: 'Navigation Bar',
+          description: 'Logo + navigation links',
+          targetTime: 10,
+          practiceCount: 0,
+        },
+        {
+          name: '07-modal',
+          title: 'Modal Dialog',
+          description: 'Overlay with close functionality',
+          targetTime: 10,
+          practiceCount: 0,
+        },
+        {
+          name: '08-dropdown',
+          title: 'Dropdown/Select',
+          description: 'Custom styled dropdown',
+          targetTime: 12,
+          practiceCount: 0,
+        },
+        {
+          name: '09-progress-bar',
+          title: 'Progress Bar',
+          description: 'Percentage-based progress indicator',
+          targetTime: 6,
+          practiceCount: 0,
+        },
+        {
+          name: '10-toggle-switch',
+          title: 'Toggle Switch',
+          description: 'On/off states for settings',
+          targetTime: 8,
+          practiceCount: 0,
+        },
+        {
+          name: '11-tabs',
+          title: 'Tabs Component',
+          description: 'Switching between content sections',
+          targetTime: 10,
+          practiceCount: 0,
+        },
+        {
+          name: '12-rating',
+          title: 'Rating Component',
+          description: 'Star rating system',
+          targetTime: 9,
+          practiceCount: 0,
+        },
+        {
+          name: '13-search-bar',
+          title: 'Search Bar',
+          description: 'With search icon and clear button',
+          targetTime: 7,
+          practiceCount: 0,
+        },
+        {
+          name: '14-toast',
+          title: 'Toast Notification',
+          description: 'Success/error messages',
+          targetTime: 8,
+          practiceCount: 0,
+        },
+        {
+          name: '15-tooltip',
+          title: 'Tooltip',
+          description: 'Hover information display',
+          targetTime: 6,
+          practiceCount: 0,
+        },
+        {
+          name: '16-avatar',
+          title: 'Avatar/Profile Picture',
+          description: 'With fallback initials',
+          targetTime: 5,
+          practiceCount: 0,
+        },
+        {
+          name: '17-accordion',
+          title: 'Accordion/Collapsible',
+          description: 'Expand/collapse content',
+          targetTime: 10,
+          practiceCount: 0,
+        },
+        {
+          name: '18-badge',
+          title: 'Badge/Chip',
+          description: 'Status indicators and tags',
+          targetTime: 5,
+          practiceCount: 0,
+        },
+        {
+          name: '19-pagination',
+          title: 'Pagination',
+          description: 'Page numbers with prev/next',
+          targetTime: 12,
+          practiceCount: 0,
+        },
+        {
+          name: '20-breadcrumb',
+          title: 'Breadcrumb Navigation',
+          description: 'Home > Category > Page path',
+          targetTime: 8,
+          practiceCount: 0,
+        },
+        {
+          name: '21-dark-mode-toggle',
+          title: 'Light/Dark Mode Toggle',
+          description: 'Theme switching',
+          targetTime: 15,
+          practiceCount: 0,
+        },
+        {
+          name: '22-shimmer-loading',
+          title: 'Shimmer UI/Skeleton Loading',
+          description: 'Content placeholders',
+          targetTime: 10,
+          practiceCount: 0,
+        },
+        {
+          name: '23-empty-state',
+          title: 'Empty State',
+          description: 'When no data to display',
+          targetTime: 6,
+          practiceCount: 0,
+        },
+        {
+          name: '24-data-table',
+          title: 'Data Table',
+          description: 'Sortable columns, basic functionality',
+          targetTime: 15,
+          practiceCount: 0,
+        },
+      ];
+
+      function checkComponentExists(componentName) {
+        // This would need to be implemented server-side or with a build process
+        // For now, return 'todo' for all components
+        return 'todo';
+      }
+
+      function renderComponents() {
+        const grid = document.getElementById('components-grid');
+        let completedCount = 0;
+        let totalPracticeCount = 0;
+
+        components.forEach((component) => {
+          const status = checkComponentExists(component.name);
+          if (status === 'completed') completedCount++;
+          totalPracticeCount += component.practiceCount;
+
+          const card = document.createElement('div');
+          card.className = `component-card ${status}`;
+
+          const statusClass = `status-${status}`;
+          const statusText =
+            status.charAt(0).toUpperCase() + status.slice(1).replace('-', ' ');
+
+          const practiceText =
+            component.practiceCount > 0
+              ? `Practiced ${component.practiceCount}x`
+              : 'Not practiced';
+
+          card.innerHTML = `
+                    <a href="components/${component.name}/index.html" class="component-link">
+                        <div class="component-title">${component.title}</div>
+                        <div class="component-description">${component.description}</div>
+                        <div class="component-meta">
+                            <span class="component-status ${statusClass}">${statusText}</span>
+                            <span class="component-practice-count">${practiceText}</span>
+                            <span class="component-time">Target: ${component.targetTime}min</span>
+                        </div>
+                    </a>
+                `;
+
+          grid.appendChild(card);
+        });
+
+        // Update stats
+        document.getElementById('completed-count').textContent = completedCount;
+        document.getElementById('total-practice').textContent =
+          totalPracticeCount;
+        const progressPercent = (completedCount / components.length) * 100;
+        document.getElementById(
+          'progress-fill',
+        ).style.width = `${progressPercent}%`;
+      }
+
+      // Initialize
+      renderComponents();
+    </script>
+  </body>
+</html>

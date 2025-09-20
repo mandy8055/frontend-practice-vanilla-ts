@@ -1,0 +1,37 @@
+{
+  "name": "frontend-practice-vanilla-ts",
+  "version": "1.0.0",
+  "description": "Vanilla HTML/CSS/TypeScript component practice for interview speed",
+  "main": "index.html",
+  "type": "module",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "compile": "tsc --watch",
+    "compile-once": "tsc",
+    "new-component": "tsx scripts/create-component.ts",
+    "serve": "live-server --port=3000 --open=/index.html",
+    "dev": "pnpm run compile & pnpm run serve"
+  },
+  "keywords": [
+    "frontend",
+    "practice",
+    "components",
+    "vanilla",
+    "typescript",
+    "interview-prep"
+  ],
+  "author": "mandy8055",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "live-server": "^1.2.2",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mandy8055/frontend-practice-vanilla-ts.git"
+  }
+}
