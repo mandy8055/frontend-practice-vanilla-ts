@@ -2,8 +2,6 @@
 
 > **Build lightning-fast component development skills for technical interviews**
 
-[![Deploy to GitHub Pages](https://github.com/mandy8055/frontend-practice-vanilla-ts/actions/workflows/deploy.yml/badge.svg)](https://github.com/mandy8055/frontend-practice-vanilla-ts/actions/workflows/deploy.yml)
-
 A systematic approach to mastering frontend fundamentals through repeated practice with vanilla HTML, CSS, and TypeScript. Perfect for interview preparation and skill building.
 
 ## 🎯 Goals
