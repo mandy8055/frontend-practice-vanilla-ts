@@ -79,51 +79,64 @@ pnpm new-component 01-cta-button
 4. **TypeScript-first** - Build with modern tooling and type safety
 5. **Progressive complexity** - Components are ordered from simple to complex
 
-### Memorized Values (Practice these until automatic)
+### Professional Values System (Practice these until automatic)
+
+#### Professional Statement for Interviews:
+
+_"I'll establish a color system using CSS custom properties. In production, these would come from design tokens or Figma specifications, but for this demo I'll use semantic named colors."_
 
 #### Colors
 
 ```css
-/* CSS Variables (recommended) */
+/* CSS Variables (Professional Approach) */
 :root {
-  --primary: #3b82f6; /* Primary blue */
-  --success: #10b981; /* Success green */
-  --danger: #ef4444; /* Danger red */
-  --warning: #f59e0b; /* Warning orange */
-  --gray: #6b7280; /* Neutral gray */
-  --dark: #1f2937; /* Dark gray */
-  --light: #f9fafb; /* Light gray */
+  /* Primary Colors - Use named colors for demos */
+  --primary: royalblue; /* Primary actions, links */
+  --success: forestgreen; /* Success states, confirmations */
+  --danger: crimson; /* Errors, warnings, delete actions */
+  --warning: orange; /* Warnings, cautions */
+
+  /* Text Colors - Simple, memorable */
+  --text-primary: #333; /* Main text, headings */
+  --text-secondary: #666; /* Secondary text, descriptions */
+  --text-light: #999; /* Placeholder text, metadata */
+
+  /* UI Colors */
+  --border: lightgray; /* Borders, dividers */
+  --bg-light: #f9f9f9; /* Light backgrounds */
+  --white: white; /* Card backgrounds, modals */
 }
 ```
 
 #### Spacing
 
 ```css
-/* rem values for consistency */
-0.5rem  /* 8px  - Tiny gaps */
-1rem    /* 16px - Standard padding */
-1.5rem  /* 24px - Medium spacing */
-2rem    /* 32px - Large padding */
-3rem    /* 48px - Big gaps */
-4rem    /* 64px - Extra large spacing */
+/* rem values for consistency and accessibility */
+0.25rem  /* 4px  - Tiny gaps, fine adjustments */
+0.5rem   /* 8px  - Small gaps, tight spacing */
+1rem     /* 16px - Standard spacing, base unit */
+1.5rem   /* 24px - Medium spacing, comfortable gaps */
+2rem     /* 32px - Large spacing, section breaks */
+3rem     /* 48px - Big gaps, major sections */
+4rem     /* 64px - Extra large spacing, page sections */
 ```
 
 #### Other Values
 
 ```css
-/* Border radius */
-border-radius: 4px, 8px, 12px;
+/* Border radius - Consistent rounding */
+border-radius: 4px, 6px, 8px, 12px;
 
-/* Font sizes */
-font-size: 0.875rem (14px), 1rem (16px), 1.125rem (18px), 1.5rem (24px),
-  2rem (32px);
+/* Font sizes - Readable hierarchy */
+font-size: 0.75rem (12px), 0.875rem (14px), 1rem (16px), 1.125rem (18px),
+  1.25rem (20px), 1.5rem (24px), 2rem (32px);
 
-/* Transitions */
+/* Transitions - Smooth interactions */
 transition: all 0.2s ease;
 
-/* Shadows */
-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+/* Shadows - Two-shadow system */
+box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Light shadow */
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Strong shadow */
 ```
 
 ## 🏗️ Component Practice Order
