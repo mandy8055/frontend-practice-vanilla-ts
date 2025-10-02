@@ -1,0 +1,63 @@
+/* Component styles - practice typing your memorized values */
+:root {
+  --text-primary: #333;
+  --text-secondary: #666;
+  --border-radius: 0.5rem;
+  --card-container-padding: 1rem;
+  --border-color: lightgray;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 1rem;
+  font-family: Arial, 'sans-serif';
+  line-height: 1.6;
+}
+
+.card {
+  margin: 0 auto;
+  max-width: 500px;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-radius);
+  padding: var(--card-container-padding);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+  padding-bottom: 1rem;
+}
+
+.title {
+  color: var(--text-primary);
+}
+
+.subtitle {
+  color: var(--text-secondary);
+}
+
+.card-content {
+  padding-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1rem;
+}
+small {
+  color: var(--text-secondary);
+}
