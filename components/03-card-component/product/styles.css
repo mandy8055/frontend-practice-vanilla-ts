@@ -1,0 +1,94 @@
+:root {
+  --text-primary: #333;
+  --text-secondary: #666;
+  --text-muted: #999;
+  --border-color: lightgray;
+  --light-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --dark-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+  --btn-success: forestgreen;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #e6e6e6;
+}
+
+.card {
+  margin: 0 auto;
+  max-width: 400px;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  box-shadow: var(--light-shadow);
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--dark-shadow);
+}
+
+.card-image {
+  height: 200px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  background: #e7e7e7; /* Fallback while image loads */
+}
+
+.card-image img {
+  display: block;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.card-header {
+  padding-bottom: 1rem;
+}
+
+.card-title {
+  color: var(--text-primary);
+}
+
+.card-subtitle {
+  color: var(--text-secondary);
+}
+
+.card-content {
+  padding-bottom: 1rem;
+}
+.card-content p {
+  color: crimson;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.card-footer {
+  padding-top: 0.5rem;
+  border-top: 2px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-cta {
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  color: white;
+  background-color: var(--btn-success);
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.btn-cta:hover {
+  filter: brightness(0.9);
+}
