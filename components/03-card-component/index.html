@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card Component Showcase</title>
+    <style>
+      /* SHARED BASE STYLES */
+      :root {
+        --text-primary: #333;
+        --text-secondary: #666;
+        --border-color: lightgray;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        background: #f9f9f9;
+      }
+
+      /* SHOWCASE HEADER */
+      .showcase-header {
+        text-align: center;
+        padding: 2rem 1rem;
+        background: white;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+      }
+
+      .showcase-header h1 {
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .showcase-header p {
+        color: var(--text-secondary);
+        margin-bottom: 1rem;
+      }
+
+      /* RESPONSIVE GRID */
+      .cards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        padding: 1.5rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      @media (max-width: 480px) {
+        .cards-container {
+          padding: 1rem;
+          gap: 1rem;
+        }
+      }
+
+      /* CARD BASE STYLES */
+      .card {
+        background: white;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .card:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: translateY(-2px);
+      }
+
+      @media (max-width: 480px) {
+        .card {
+          padding: 0.875rem;
+        }
+      }
+
+      .card-image {
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+        margin-bottom: 1rem;
+        background: #f0f0f0;
+        border-radius: 0.25rem;
+      }
+
+      @media (max-width: 480px) {
+        .card-image {
+          height: 160px;
+        }
+      }
+
+      .card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .card-header {
+        margin-bottom: 1rem;
+      }
+
+      .card-title {
+        color: var(--text-primary);
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0 0 0.25rem;
+        line-height: 1.3;
+      }
+
+      @media (max-width: 480px) {
+        .card-title {
+          font-size: 1.125rem;
+        }
+      }
+
+      .card-subtitle {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        margin: 0;
+      }
+
+      .card-content {
+        color: var(--text-secondary);
+        margin-bottom: 1rem;
+        flex-grow: 1;
+      }
+
+      .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border-color);
+        gap: 0.5rem;
+      }
+
+      @media (max-width: 360px) {
+        .card-footer {
+          flex-direction: column;
+          align-items: stretch;
+        }
+      }
+
+      button {
+        background: royalblue;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      button:hover {
+        background: #4169e1;
+      }
+
+      button:active {
+        animation: button-press 0.2s ease;
+      }
+
+      @keyframes button-press {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(0.95);
+        }
+      }
+
+      small {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+      }
+
+      /* PRODUCT SPECIFIC */
+      .price {
+        color: crimson;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0;
+      }
+
+      @media (max-width: 480px) {
+        .price {
+          font-size: 1.25rem;
+        }
+      }
+
+      .full-width {
+        width: 100%;
+        background: forestgreen;
+      }
+
+      .full-width:hover {
+        background: #228b22;
+      }
+
+      /* LINKS SECTION */
+      .links-section {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .links-section h2 {
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+      }
+
+      .links-section ul {
+        list-style: none;
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .links-section li a {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background: royalblue;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 600;
+        transition: all 0.2s ease;
+      }
+
+      .links-section li a:hover {
+        background: #4169e1;
+        transform: translateY(-2px);
+      }
+
+      @media (max-width: 480px) {
+        .links-section ul {
+          flex-direction: column;
+        }
+
+        .links-section li a {
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- SHOWCASE HEADER -->
+    <div class="showcase-header">
+      <h1>Card Component System</h1>
+      <p>Three responsive card variants built with semantic HTML and CSS</p>
+    </div>
+
+    <!-- RESPONSIVE CARDS GRID -->
+    <div class="cards-container">
+      <!-- BASE CARD -->
+      <article class="card">
+        <header class="card-header">
+          <h3 class="card-title">Simple Card</h3>
+          <p class="card-subtitle">Base Component</p>
+        </header>
+        <main class="card-content">
+          <p>
+            Foundation card structure with semantic HTML. Perfect for blog
+            posts, articles, or general content display.
+          </p>
+        </main>
+        <footer class="card-footer">
+          <small>6 min target</small>
+          <button>Practice</button>
+        </footer>
+      </article>
+
+      <!-- ARTICLE CARD -->
+      <article class="card">
+        <figure class="card-image">
+          <img src="https://placehold.co/400x200" alt="Article image" />
+        </figure>
+        <header class="card-header">
+          <h3 class="card-title">Article Card</h3>
+          <p class="card-subtitle">With Featured Image</p>
+        </header>
+        <main class="card-content">
+          <p>
+            Add visual content for blog posts and news articles. Same foundation
+            with image section added.
+          </p>
+        </main>
+        <footer class="card-footer">
+          <small>Technology</small>
+          <button>Read More</button>
+        </footer>
+      </article>
+
+      <!-- PRODUCT CARD -->
+      <article class="card">
+        <figure class="card-image">
+          <img src="https://placehold.co/400x200" alt="Wireless Headphones" />
+        </figure>
+        <header class="card-header">
+          <h3 class="card-title">Wireless Headphones</h3>
+          <p class="card-subtitle">Noise Cancelling • 30hr Battery</p>
+        </header>
+        <main class="card-content">
+          <p class="price">$89.99</p>
+        </main>
+        <footer class="card-footer">
+          <button class="full-width">Add to Cart</button>
+        </footer>
+      </article>
+    </div>
+
+    <!-- INDIVIDUAL CARD LINKS -->
+    <div class="links-section">
+      <h2>View Individual Cards</h2>
+      <ul>
+        <li><a href="base/index.html">Base Card →</a></li>
+        <li><a href="article/index.html">Article Card →</a></li>
+        <li><a href="product/index.html">Product Card →</a></li>
+      </ul>
+    </div>
+
+    <script>
+      // Universal interaction
+      document.querySelectorAll('.card').forEach((card) => {
+        card.addEventListener('click', (e) => {
+          const target = e.target;
+
+          if (target.tagName === 'BUTTON') {
+            console.log(`${target.textContent.trim()} clicked!`);
+          } else {
+            console.log('Card clicked!');
+          }
+        });
+      });
+
+      console.log('Card showcase loaded!');
+    </script>
+  </body>
+</html>
